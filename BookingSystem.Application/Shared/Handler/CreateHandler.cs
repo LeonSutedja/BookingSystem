@@ -1,15 +1,20 @@
-﻿using Abp.Dependency;
-
-namespace BookingSystem.Shared.CreateHandler
+﻿namespace BookingSystem.Shared.Handler
 {
-    public interface ICreateHandler<T>
+    using Abp.Domain.Entities;
+    using Abp.Dependency;
+
+    public interface ICreateHandler<in TCommand, TEntity>
+        where TEntity : Entity
+        where TCommand : ICreateCommand<TEntity>
     {
-        HandlerResponse Create(T input);
+        HandlerResponse Create(TCommand input);
     }
 
     public interface ICreateHandlerFactory
     {
-        ICreateHandler<T> CreateHandler<T>();
+        ICreateHandler<TCommand, TEntity> CreateHandler<TCommand, TEntity>() 
+            where TEntity : Entity
+            where TCommand : ICreateCommand<TEntity>;
     }
 
     public class CreateHandlerFactory : ICreateHandlerFactory
@@ -21,7 +26,9 @@ namespace BookingSystem.Shared.CreateHandler
             _iocResolver = iocResolver;
         }
 
-        public ICreateHandler<T> CreateHandler<T>()
-            => (ICreateHandler<T>)_iocResolver.Resolve(typeof(ICreateHandler<>).MakeGenericType(typeof(T)));
+        public ICreateHandler<TCommand, TEntity> CreateHandler<TCommand, TEntity>()
+            where TEntity : Entity
+            where TCommand : ICreateCommand<TEntity>
+            => _iocResolver.Resolve<ICreateHandler<TCommand, TEntity>>();
     }
 }

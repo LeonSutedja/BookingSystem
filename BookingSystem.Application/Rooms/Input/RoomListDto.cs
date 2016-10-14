@@ -7,5 +7,7 @@
     public class RoomListDto : EntityDto<int>
     {
         public string Name { get; set; }
+
+        public int NumberOfPeople { get; set; }
     }   
 }

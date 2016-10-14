@@ -13,12 +13,17 @@
             }
 
             var createRoomInput = {
-                name: ''
+                name: '',
+                numberOfPeople: 0
             };
+
             vm.uiRoomName = "";
+            vm.uiNumberOfPeople = 0;
+
             vm.registerClick = function () {
                 abp.ui.setBusy();
                 createRoomInput.name = vm.uiRoomName;
+                createRoomInput.numberOfPeople = vm.uiNumberOfPeople;
                 roomService.createRoom(createRoomInput)
                     .success(function () {
                         abp.notify.info(App.localize('SavedSuccessfully'));

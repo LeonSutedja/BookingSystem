@@ -3,7 +3,7 @@
     using System;
     using Abp.Domain.Entities;
 
-    public class Customer : Entity<int>
+    public class Customer : Entity
     {
         public static Customer Create(string firstName, string lastName, DateTime dob)
         {

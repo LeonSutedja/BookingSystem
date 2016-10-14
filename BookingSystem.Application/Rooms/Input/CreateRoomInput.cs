@@ -1,30 +1,24 @@
-﻿namespace BookingSystem.Rooms.Input
-{
-    using Shared;
-    using Shared.CreateHandler;
-    using Abp.Domain.Repositories;
+﻿using System.ComponentModel.DataAnnotations;
+using BookingSystem.Shared.Handler;
 
-    public class CreateRoomInput
+namespace BookingSystem.Rooms.Input
+{
+    public class CreateRoomInput : ICreateCommand<Room>
     {
+        [Required]
+        [StringLength(20)]
         public string Name { get; set; }
+
+        [Required]
+        public int NumberOfPeople { get; set; }
     }
 
-    public class CreateRoomInputHandler : ICreateHandler<CreateRoomInput>
+    public class CreateRoomCommandMapper : ICreateCommandMapper<CreateRoomInput, Room>
     {
-        private IRepository<Room, int> _roomRepository;
-
-        public CreateRoomInputHandler(IRepository<Room, int> roomRepository)
+        public Room Create(CreateRoomInput command)
         {
-            _roomRepository = roomRepository;
+            var newRoom = Room.Create(command.Name, command.NumberOfPeople);
+            return newRoom;
         }
-
-        public HandlerResponse Create(CreateRoomInput input)
-        {
-            if (string.IsNullOrEmpty(input.Name)) return HandlerResponse.Failed("Name must not be empty");
-            var newRoom = Room.Create(input.Name);
-            var newId = _roomRepository.InsertAndGetId(newRoom);
-            
-            return HandlerResponse.Success("Room Created!", newId);
-        }        
     }
 }

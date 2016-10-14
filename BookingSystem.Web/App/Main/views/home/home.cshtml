@@ -9,12 +9,14 @@
                 <div class="panel-body">
                     <label>Name:</label>
                     <input type="text" class="form-control" ng-model="vm.uiRoomName" />
+                    <label>Number Of People:</label>
+                    <input type="text" class="form-control" ng-model="vm.uiNumberOfPeople" />
                     <button class="btn btn-primary btn-sm" style="float:right; margin-top:10px;" ng-click="vm.registerClick()">Register</button>
                 </div>
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-
+                    <h3 class="panel-title">Room List</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table">
@@ -27,6 +29,7 @@
                         <tbody>
                             <tr ng-repeat="room in vm.rooms">
                                 <td>{{room.name}}</td>
+                                <td>{{room.numberOfPeople}}</td>
                                 <td><button class="btn btn-sm btn-danger" 
                                             ng-click="vm.deleteRoom(room.id)">Delete</button></td>
                             </tr>
@@ -34,11 +37,6 @@
                     </table>
                 </div>
             </div>        
-        </div>
-    </div> 
-    <div class="row">
-        <div class="col-md-12">
-          
         </div>
     </div>
 </div>

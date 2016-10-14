@@ -1,21 +1,22 @@
 ﻿namespace BookingSystem.Rooms
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Abp.Application.Services.Dto;
     using Abp.Domain.Repositories;
     using Abp.AutoMapper;
-    using BookingSystem.Shared;
-    using BookingSystem.Rooms.Input;
-    using BookingSystem.Shared.CreateHandler;
-    using System.Collections.Generic;
-    using System;
-
+    using Shared;
+    using Input;
+    using Shared.Handler;
+    
     public class RoomAppService : BookingSystemAppServiceBase, IRoomAppService
     {
-        private ICreateHandlerFactory _createHandlerFactory;
-        private IRepository<Room, int> _roomRepository;
+        private readonly ICreateHandlerFactory _createHandlerFactory;
+        private readonly IRepository<Room, int> _roomRepository;
 
-        public RoomAppService(ICreateHandlerFactory createHandlerFactory, IRepository<Room, int> roomRepository)
+        public RoomAppService(
+            ICreateHandlerFactory createHandlerFactory, 
+            IRepository<Room, int> roomRepository)
         {
             _createHandlerFactory = createHandlerFactory;
             _roomRepository = roomRepository;
@@ -23,16 +24,16 @@
 
         public HandlerResponse CreateRoom(CreateRoomInput input)
         {
-            var handler = _createHandlerFactory.CreateHandler<CreateRoomInput>();
+            var handler = _createHandlerFactory.CreateHandler<CreateRoomInput, Room>();
             var result = handler.Create(input);
             return result;
         }
 
         public HandlerResponse DeleteRoom(DeleteRoomInput input)
         {
-            var handler = _createHandlerFactory.CreateHandler<DeleteRoomInput>();
-            var result = handler.Create(input);
-            return result;
+            //var handler = _createHandlerFactory.CreateHandler<DeleteRoomInput>();
+            //var result = handler.Create(input);
+            return HandlerResponse.Success("yes", 1);
         }
 
         public async Task<ListResultDto<RoomListDto>> GetRooms()

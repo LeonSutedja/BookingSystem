@@ -1,10 +1,10 @@
 ﻿namespace BookingSystem.Rooms
 {
+    using System.Threading.Tasks;
     using Abp.Application.Services;
     using Abp.Application.Services.Dto;
-    using BookingSystem.Shared;
     using Input;
-    using System.Threading.Tasks;
+    using Shared;
 
     public interface IRoomAppService : IApplicationService
     {

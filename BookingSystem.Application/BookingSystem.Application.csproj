@@ -104,6 +104,10 @@
   <ItemGroup>
     <Compile Include="BookingSystemApplicationModule.cs" />
     <Compile Include="BookingSystemAppServiceBase.cs" />
+    <Compile Include="Customers\Input\CreateCustomerInput.cs" />
+    <Compile Include="Customers\Input\DeleteCustomerInput.cs" />
+    <Compile Include="Customers\Input\RoomListDto.cs" />
+    <Compile Include="Customers\ICustomerAppService.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />
     <Compile Include="MultiTenancy\ITenantAppService.cs" />
     <Compile Include="MultiTenancy\Dto\TenantListDto.cs" />
@@ -116,8 +120,11 @@
     <Compile Include="Rooms\Input\CreateRoomInput.cs" />
     <Compile Include="Rooms\IRoomAppService.cs" />
     <Compile Include="Rooms\RoomAppService.cs" />
+    <Compile Include="Shared\Handler\CreateCommandMapperFactory.cs" />
     <Compile Include="Shared\Handler\CreateHandler.cs" />
     <Compile Include="Shared\HandlerResponse.cs" />
+    <Compile Include="Shared\Handler\GenericCreateHandler.cs" />
+    <Compile Include="Shared\Handler\ICreateCommand.cs" />
     <Compile Include="Users\Dto\CreateUserInput.cs" />
     <Compile Include="Users\IUserAppService.cs" />
     <Compile Include="Roles\RoleAppService.cs" />
@@ -142,6 +149,7 @@
       <Name>BookingSystem.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

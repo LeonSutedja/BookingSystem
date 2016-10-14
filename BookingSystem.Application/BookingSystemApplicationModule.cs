@@ -2,7 +2,7 @@
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using BookingSystem.Shared.CreateHandler;
+using BookingSystem.Shared.Handler;
 
 namespace BookingSystem
 {
@@ -21,16 +21,25 @@ namespace BookingSystem
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+            
+            IocManager.IocContainer.Register(
+                Component.For(typeof(ICreateHandler<,>))
+                .ImplementedBy(typeof(GenericCreateHandler<,>))
+                .LifestyleTransient());
+
+            IocManager.IocContainer.Register(Component.For(typeof(ICreateHandlerFactory))
+                .ImplementedBy(typeof(CreateHandlerFactory))
+                .LifestyleTransient());
 
             IocManager.IocContainer.Register(
                 Classes.FromThisAssembly()
-                .BasedOn(typeof(ICreateHandler<>))
+                .BasedOn(typeof(ICreateCommandMapper<,>))
                 .WithService.AllInterfaces()
                 .LifestyleTransient()
                 .AllowMultipleMatches());
 
-            IocManager.IocContainer.Register(Component.For(typeof(ICreateHandlerFactory))
-                .ImplementedBy(typeof(CreateHandlerFactory))
+            IocManager.IocContainer.Register(Component.For(typeof(ICreateCommandMapperFactory))
+                .ImplementedBy(typeof(CreateCommandMapperFactory))
                 .LifestyleTransient());
         }
     }
