@@ -1,8 +1,8 @@
-namespace BookingSystem.Shared.Handler
-{
-    using Abp.Dependency;
-    using Abp.Domain.Entities;
+using Abp.Dependency;
+using Abp.Domain.Entities;
 
+namespace BookingSystem.Shared.Handler.Create
+{
     public interface ICreateCommandMapper<in TCommand, out TEntity>
         where TCommand : ICreateCommand<TEntity>
         where TEntity : Entity

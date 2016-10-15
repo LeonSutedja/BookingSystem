@@ -12,6 +12,8 @@ namespace BookingSystem.EntityFramework
         //TODO: Define an IDbSet for your Entities...
         public IDbSet<Room> Rooms { get; set; }
 
+        public IDbSet<Customer> Customers { get; set; }
+
         /* NOTE: 
          *   Setting "Default" to base class helps us when working migration commands on Package Manager Console.
          *   But it may cause problems when working Migrate.exe of EF. If you will apply migrations on command line, do not

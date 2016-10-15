@@ -1,4 +1,4 @@
-﻿namespace BookingSystem.Rooms.Input
+﻿namespace BookingSystem.Rooms.Command
 {
     using Abp.Application.Services.Dto;
     using Abp.AutoMapper;

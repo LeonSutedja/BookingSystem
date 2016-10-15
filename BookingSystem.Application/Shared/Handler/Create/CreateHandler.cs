@@ -1,8 +1,8 @@
-﻿namespace BookingSystem.Shared.Handler
-{
-    using Abp.Domain.Entities;
-    using Abp.Dependency;
+﻿using Abp.Dependency;
+using Abp.Domain.Entities;
 
+namespace BookingSystem.Shared.Handler.Create
+{
     public interface ICreateHandler<in TCommand, TEntity>
         where TEntity : Entity
         where TCommand : ICreateCommand<TEntity>

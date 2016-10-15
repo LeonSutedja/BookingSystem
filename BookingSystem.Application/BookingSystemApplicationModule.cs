@@ -2,7 +2,10 @@
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using BookingSystem.Shared.Handler;
+using BookingSystem.Shared.Handler.Create;
+using BookingSystem.Shared.Handler.Delete;
+using BookingSystem.Shared.Handler.Validation;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 
 namespace BookingSystem
 {
@@ -21,7 +24,26 @@ namespace BookingSystem
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            
+
+            IocManager.IocContainer.Kernel.Resolver
+                .AddSubResolver(new CollectionResolver(IocManager.IocContainer.Kernel));
+
+            IocManager.IocContainer.Register(
+                Classes.FromThisAssembly()
+                .BasedOn(typeof(IBusinessRule<,>))
+                .WithService.AllInterfaces()
+                .LifestyleTransient()
+                .AllowMultipleMatches());
+
+            IocManager.IocContainer.Register(
+                Component.For(typeof(IDeleteHandler<,>))
+                .ImplementedBy(typeof(GenericDeleteHandler<,>))
+                .LifestyleTransient());
+
+            IocManager.IocContainer.Register(Component.For(typeof(IDeleteHandlerFactory))
+                .ImplementedBy(typeof(DeleteHandlerFactory))
+                .LifestyleTransient());
+
             IocManager.IocContainer.Register(
                 Component.For(typeof(ICreateHandler<,>))
                 .ImplementedBy(typeof(GenericCreateHandler<,>))

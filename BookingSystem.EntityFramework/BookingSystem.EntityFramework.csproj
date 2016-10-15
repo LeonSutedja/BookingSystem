@@ -196,6 +196,10 @@
     <Compile Include="Migrations\201610142127553_Add people number in room.Designer.cs">
       <DependentUpon>201610142127553_Add people number in room.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610152145234_Add-Customer-To-DbContext.cs" />
+    <Compile Include="Migrations\201610152145234_Add-Customer-To-DbContext.Designer.cs">
+      <DependentUpon>201610152145234_Add-Customer-To-DbContext.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbpZeroDbMigrator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BookingSystemDataModule.cs" />
@@ -275,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610142127553_Add people number in room.resx">
       <DependentUpon>201610142127553_Add people number in room.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610152145234_Add-Customer-To-DbContext.resx">
+      <DependentUpon>201610152145234_Add-Customer-To-DbContext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,14 +3,14 @@
     using System.Threading.Tasks;
     using Abp.Application.Services;
     using Abp.Application.Services.Dto;
-    using Input;
+    using Command;
     using Shared;
 
     public interface IRoomAppService : IApplicationService
     {
-        HandlerResponse CreateRoom(CreateRoomInput input);
+        HandlerResponse CreateRoom(RoomCreateCommand createCommand);
 
-        HandlerResponse DeleteRoom(DeleteRoomInput input);
+        HandlerResponse DeleteRoom(DeleteRoomCommand input);
 
         Task<ListResultDto<RoomListDto>> GetRooms();
     }

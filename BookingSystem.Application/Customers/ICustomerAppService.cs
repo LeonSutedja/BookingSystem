@@ -8,7 +8,7 @@
 
     public interface ICustomerAppService : IApplicationService
     {
-        HandlerResponse CreateCustomer(CreateCustomerInput input);
+        HandlerResponse CreateCustomer(CustomerInput input);
 
         HandlerResponse DeleteCustomer(DeleteCustomerInput input);
 
